@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    不推荐-->
+<!--    自定义Spring配置文件，默认不被SpringBoot识别，需要在主配置类中添加@ImportResource注解-->
+
+    <bean id="studentService" class="priv.howard.SpringBootDemo.service.StudentService">
+        <property name="studentDao" ref="studentDao"/>
+    </bean>
+
+    <bean id="studentDao" class="priv.howard.SpringBootDemo.dao.StudentDao"/>
+</beans>

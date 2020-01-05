@@ -1,0 +1,68 @@
+#YAML(.yml)：属性名:[空格]属性值，通过垂直对齐的缩进指定层次关系
+#以下等于:
+#<server>
+#   <port>8080</port>
+#</server>
+server:
+  port: 8080
+
+#  通过 spring:  profiles:  active: 环境名 来指定使用的环境(同properties)
+#spring:
+#  profiles:
+#    active: test
+
+#以上为主配置yml，通过分隔符---来进行分割，分隔符上下为两个yml
+---
+#开发环境配置，通过spring:  profiles: 环境名 来指定环境名(同properties)
+server:
+  port: 8081
+spring:
+  profiles: dev
+---
+#测试环境配置
+server:
+  port: 8081
+spring:
+  profiles: test
+---
+#注入对象的变量名，注意全部小写且以-连接单词
+student:
+#  简单类型属性直接给出属性值
+  name: howard
+#  可以通过占位符引用另一个资源文件的值，如果该值不存在则使用:后的值（可选）
+  age: ${studentAge:20}
+  sex: true
+  birthday: 1997/01/01
+  email: 1233444@qq.com
+
+#  yml中字符串不需要添加引号，如果添加了双引号，那么字符串中的转义字符(/n -> 回车)将会生效，不添加双引号的转义字符内容将原样输出
+#  @ConfigurationProperties还支持变量名的驼峰转松散语法，例如homeAddress属性可以写成home-address
+
+#  Map类型：1、通过{k: v,k: v,...}一一给出，2、通过换行缩进方式给出
+  address: {province: 广东, city: 广州, zone: 天河区}
+#  或：
+#  address:
+#    province: 广东
+#    city: 广州
+#    zone: 天河区
+
+#  数组、List、Set类型每一条数据 1、换行缩进后通过 - 数据值 给出 2、通过[数据1,数据2,...]给出(中括号可以省略）
+#  String[]
+  hobbies:
+    - 足球
+    - 篮球
+#  List<String>
+  skills:
+    - 唱歌
+    - 跳舞
+#  或:
+#  hobbies: [足球, 篮球]
+#  skills: [唱歌, 跳舞]
+
+#  对象类型，对对象的属性1、换行缩进后对属性直接赋值，2、通过{属性名: 属性值,属性名: 属性值,...}给出
+  pet:
+    name: Kitty
+    age: 1
+#  或
+#  pet: {name: Kitty, age: 1}
+
